@@ -9,7 +9,6 @@
 #include "minheap.cpp"
 #include "kclosest.cpp"
 
-// --- Simple Testing Framework ---
 int passed = 0;
 int failed = 0;
 
@@ -23,7 +22,6 @@ void logFail(const std::string& testName, const std::string& msg) {
     failed++;
 }
 
-// --- MinHeap Tests ---
 void testHeapPushPop() {
     try {
         MinHeap h;

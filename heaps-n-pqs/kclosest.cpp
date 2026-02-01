@@ -5,13 +5,9 @@
 
 using namespace std;
 
-// Represents a 2D point
 struct Point {
     int x;
     int y;
-    
-    // Helper to calculate squared distance to origin (0,0)
-    // We use squared distance to avoid expensive sqrt() calls
     long distanceSq() const {
         return (x * x) + (y * y);
     }

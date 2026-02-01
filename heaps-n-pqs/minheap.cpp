@@ -2,7 +2,6 @@
 #include <vector>
 #include <stdexcept>
 
-// A simple Min-Heap implementation using a vector
 class MinHeap {
 private:
     std::vector<int> heap;
