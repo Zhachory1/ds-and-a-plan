@@ -8,16 +8,19 @@ using namespace std;
 struct Point {
     int x;
     int y;
+
     long distanceSq() const {
         return (x * x) + (y * y);
+    }
+
+    bool operator<(const Point& other) const {
+        return distanceSq() < other.distanceSq();
     }
 };
 
 class Solution {
 public:
     vector<Point> kClosest(vector<Point>& points, int k) {
-        // TODO: Implement finding the K closest points.
-        
         // STRATEGY HINT:
         // We want the K *smallest* distances.
         // If we use a Max-Heap of size K:
@@ -28,12 +31,24 @@ public:
         // 1. Define a Max-Heap (priority_queue).
         //    C++ priority_queue is a Max-Heap by default.
         //    You will need to store pairs of {distance, index} OR custom Point objects.
+        std::priority_queue<Point> max_heap;
         
         // 2. Iterate through points and maintain the heap size at K.
+        for (Point point : points) {
+            max_heap.push(point);
+
+            if (max_heap.size() > k) max_heap.pop();
+        }
         
         // 3. Extract results from heap into a vector.
+        std::vector<Point> k_closest;
+
+        while (!max_heap.empty()) {
+            k_closest.emplace_back(max_heap.top());
+            max_heap.pop();
+        }
         
-        return {}; // Placeholder
+        return k_closest;
     }
 };
 

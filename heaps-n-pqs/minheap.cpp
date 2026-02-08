@@ -13,24 +13,48 @@ private:
 
     // HELPER: Calculate left child index
     int leftChild(int i) {
-        // TODO: Return the index of the left child
-        return 0; // Placeholder
+        return 2 * i + 1;
     }
 
     // HELPER: Calculate right child index
     int rightChild(int i) {
-        // TODO: Return the index of the right child
-        return 0; // Placeholder
+        return 2 * i + 2;
     }
 
     // HELPER: Move an element up to its correct position
     void bubbleUp(int index) {
-        // TODO
+        int currentIndex = index;
+        int parentIndex = parent(currentIndex);
+
+        while(currentIndex > 0 && heap[currentIndex] < heap[parentIndex]) {
+            std::swap(heap[currentIndex], heap[parentIndex]);
+
+            currentIndex = parentIndex;
+            parentIndex = parent(currentIndex);
+        }
     }
 
     // HELPER: Move an element down to its correct position
     void bubbleDown(int index) {
-        // TODO
+        int currentIndex = index;
+        int leftChildIndex = leftChild(currentIndex);
+        int rightChildIndex = rightChild(currentIndex);
+
+        while(leftChildIndex < heap.size()) {
+            int smallerChildIndex = leftChildIndex;
+
+            if (rightChildIndex < heap.size() && heap[rightChildIndex] < heap[leftChildIndex]) {
+                smallerChildIndex = rightChildIndex;
+            }
+
+            if (heap[currentIndex] <= heap[smallerChildIndex]) break;
+
+            std::swap(heap[currentIndex], heap[smallerChildIndex]);
+            
+            currentIndex = smallerChildIndex;
+            leftChildIndex = leftChild(currentIndex);
+            rightChildIndex = rightChild(currentIndex);
+        }
     }
 
 public:
@@ -42,16 +66,21 @@ public:
 
     // Adds a new element to the heap
     void push(int value) {
-        // TODO
+        heap.emplace_back(value);
+        bubbleUp(heap.size() - 1);
     }
 
     // Removes and returns the minimum element
     int pop() {
         if (heap.empty()) throw std::runtime_error("Heap is empty");
         
-        // TODO
-        
-        return -1; // Placeholder return
+        int root = heap[0];
+        heap[0] = heap.back();
+        heap.pop_back();
+
+        if (!heap.empty()) bubbleDown(0);
+
+        return root;
     }
 
     int size() {
