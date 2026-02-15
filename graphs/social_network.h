@@ -21,7 +21,7 @@ private:
     // Key = User, Value = List of users who follow them
     std::unordered_map<std::string, std::vector<std::string>> reverse_adj_list;
     
-    bool is_directed;
+    // bool is_directed;
 
 public:
     /**
