@@ -1,0 +1,20 @@
+{
+  "cities": [
+    { "name": "New York", "x": 0, "y": 0 },
+    { "name": "Boston", "x": 3, "y": 5 },
+    { "name": "Philadelphia", "x": 2, "y": -1 },
+    { "name": "Washington DC", "x": 5, "y": -3 },
+    { "name": "Baltimore", "x": 4, "y": -2 },
+    { "name": "Richmond", "x": 7, "y": -5 },
+    { "name": "Pittsburgh", "x": 1, "y": 2 },
+    { "name": "Newark", "x": 1, "y": 1 },
+    { "name": "Providence", "x": 4, "y": 6 },
+    { "name": "Hartford", "x": 3, "y": 3 },
+    { "name": "Buffalo", "x": -2, "y": 2 },
+    { "name": "Albany", "x": 2, "y": 4 },
+    { "name": "Harrisburg", "x": 3, "y": 0 },
+    { "name": "Trenton", "x": 2, "y": -0.5 },
+    { "name": "Norfolk", "x": 8, "y": -6 }
+  ],
+  "comment": "Coordinates are simplified for educational purposes. Distances are Euclidean."
+}
