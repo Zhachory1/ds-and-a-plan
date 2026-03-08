@@ -1,0 +1,41 @@
+# Claude
+CLAUDE.md
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# C++ build artifacts
+*.o
+*.out
+*.a
+*.so
+*.dylib
+*.dSYM/
+
+# C++ compiled binaries (from Makefiles)
+run_tests
+my_heap
+my_k
+test_network
+student_solutions
+student_solutions_for_test.o
+test_homework
+solution
+tsp_solver
+merge_sort
+quick_sort
+inversions_demo
