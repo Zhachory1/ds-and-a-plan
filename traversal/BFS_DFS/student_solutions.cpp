@@ -7,12 +7,34 @@
 #include <iostream>
 
 int findConnectedComponents(const Graph& graph) {
-    // TODO: Implement this function
-    
-    // Hint: Use a set to track visited vertices
-    // For each unvisited vertex, start a DFS
-    
-    return 0; // Replace with your implementation
+    std::set<int> visited;
+    std::vector<int> stack;
+    stack.resize(graph.getNumVertices());
+
+    int components = 0;
+    for (int vertex = 0; vertex < graph.getNumVertices(); vertex++) {
+        if (visited.find(vertex) != visited.end()) {
+            continue;
+        }
+
+        components++;
+        visited.insert(vertex);
+        stack.push_back(vertex);
+
+        while (!stack.empty()) {
+            int current = stack.back();
+            stack.pop_back();
+
+            for (int neighbor : graph.getNeighbors(current)) {
+                // Check if neighbor was not visited before
+                if (visited.insert(neighbor).second) {
+                    stack.push_back(neighbor);
+                }
+            }
+        }
+    }
+
+    return components;
 }
 
 void dfsHelper(const Graph& graph, int vertex, std::set<int>& visited) {
@@ -22,17 +44,36 @@ void dfsHelper(const Graph& graph, int vertex, std::set<int>& visited) {
 int shortestPathGrid(const std::vector<std::vector<int>>& grid, 
                      std::pair<int, int> start, 
                      std::pair<int, int> end) {
-    // TODO: Implement this function
-    
-    // Hint: Use BFS with a queue
-    
-    return -1; // Replace with your implementation
+    GridGraph graph(grid);
+
+    std::queue<std::pair<int, int>> queue;
+    std::vector<std::vector<int>> distances(graph.getRows(), std::vector<int>(graph.getCols(), -1));
+
+    queue.push(start);
+    distances[start.first][start.second] = 0;
+
+    while (!queue.empty()) {
+        std::pair<int, int> current = queue.front();
+        queue.pop();
+
+        if (current == end) {
+            return distances[current.first][current.second];
+        }
+
+        for (std::pair<int, int> neighbor : graph.getNeighbors(current.first, current.second)) {
+            distances[neighbor.first][neighbor.second] = distances[current.first][current.second] + 1;
+            queue.push(neighbor);
+        }
+    }
+
+    return -1;
 }
 
 // ============================================================================
 // Example test code - run this to test your implementations manually
 // ============================================================================
 
+#ifndef HOMEWORK_TEST_BUILD
 int main() {
     std::cout << "Testing findConnectedComponents:" << std::endl;
     std::cout << std::string(50, '-') << std::endl;
@@ -77,3 +118,4 @@ int main() {
     
     return 0;
 }
+#endif

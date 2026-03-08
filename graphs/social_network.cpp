@@ -130,6 +130,8 @@ bool SocialNetwork::has_cycle_helper(const std::string& node,
                                      std::vector<std::string>& current_path,
                                      std::vector<std::vector<std::string>>& cycles) const {
     // Mark node as being visited and add to current DFS path
+    // Do it with hashmap now
+
     state[node] = 1;
     current_path.emplace_back(node);
 

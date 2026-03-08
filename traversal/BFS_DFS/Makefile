@@ -10,7 +10,7 @@ student_solutions: student_solutions.cpp Graph.h student_solutions.h
 	$(CXX) $(CXXFLAGS) -o student_solutions student_solutions.cpp
 
 test_homework: homework_test.cpp student_solutions.h Graph.h
-	$(CXX) $(CXXFLAGS) -c student_solutions.cpp -o student_solutions_for_test.o
+	$(CXX) $(CXXFLAGS) -DHOMEWORK_TEST_BUILD -c student_solutions.cpp -o student_solutions_for_test.o
 	$(CXX) $(CXXFLAGS) homework_test.cpp student_solutions_for_test.o -o test_homework
 
 solution: solution.cpp Graph.h
