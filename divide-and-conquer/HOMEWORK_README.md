@@ -5,7 +5,7 @@
 ```
 merge-sort/      # HW1 — Implement Merge Sort from memory
 quick-sort/      # HW2 — Quick Sort with randomized pivot
-inversions/      # HW3 — Count Inversions using D&C (⭐⭐⭐)
+inversions/      # HW3 — Count Inversions using D&C
 ```
 
 Each directory is self-contained: implement the TODO functions in the `.cpp` file, then run `make test`.
@@ -38,7 +38,7 @@ Implement in `merge-sort/merge_sort.cpp`:
 
 Use `mid = left + (right - left) / 2` to avoid integer overflow.
 
-**Performance test:** must sort 100,000 random elements in under 2 seconds.
+**Performance test:** must sort 100,000 random elements in under 2 seconds. (n^2 would like 5-30 seconds, this should take less than 1/10 of a second)
 
 ## HW2 — Quick Sort with Randomized Pivot
 
@@ -49,7 +49,7 @@ Implement in `quick-sort/quick_sort.cpp`:
 
 **Depth test:** on sorted input of 1,000 elements, deterministic depth should be ≥ 500 (O(n)); randomized should be < 250.
 
-**Performance test:** randomized must sort 100,000 already-sorted elements in under 2 seconds.
+**Performance test:** randomized must sort 100,000 already-sorted elements in under 2 seconds. (n^2 would like 5-30 seconds, this should take less than 1/10 of a second)
 
 ## HW3 — Count Inversions ⭐⭐⭐
 
@@ -63,4 +63,4 @@ Implement in `inversions/inversions.cpp`:
 
 **Verification:** `[2, 4, 1, 3, 5]` → 3 inversions: (2,1), (4,1), (4,3).
 
-**Performance test:** reverse-sorted 100,000 elements (maximum inversions = n*(n-1)/2 ≈ 5 billion) must complete in under 2 seconds. This will timeout if you accidentally implemented O(n²).
+**Performance test:** reverse-sorted 100,000 elements (maximum inversions = n*(n-1)/2 ≈ 5 billion) must complete in under 2 seconds. This will timeout if you accidentally implemented O(n²). (n^2 would like 5-30 seconds, this should take less than 1/10 of a second)
