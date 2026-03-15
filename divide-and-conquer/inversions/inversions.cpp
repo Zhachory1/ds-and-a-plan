@@ -9,22 +9,62 @@
 #include <vector>
 
 long long countInversionsBrute(const std::vector<int>& arr) {
-    // TODO: Count inversions with two nested loops.
-    //
     // For every pair (i, j) where i < j, check if arr[i] > arr[j].
     // If yes, that's an inversion — increment your counter.
-    //
     // This is intentionally O(n²). Use it to verify your D&C answer is correct.
 
-    return 0; // placeholder
+    long long inversions = 0;
+
+    for (int i = 0; i < arr.size(); i++) {
+        for (int j = i + 1; j < arr.size(); j++) {
+            if (arr[i] > arr[j]) {
+                inversions++;
+            }
+        }
+    }
+
+    return inversions;
 }
 
 long long mergeCount(std::vector<int>& arr, int left, int right) {
-    // TODO: Modified merge sort that counts inversions.
-    //
     // Hint: Return leftInv + rightInv + mergeInversions
+    if (left >= right) return 0;
 
-    return 0; // placeholder
+    int mid = left + (right - left) / 2;
+    long long inversions = 0;
+
+    inversions += mergeCount(arr, left, mid);
+    inversions += mergeCount(arr, mid + 1, right);
+
+    std::vector<int> merged;
+    merged.reserve(right - left + 1);
+
+    int i = left, j = mid + 1;
+
+    while (i <= mid || j <= right) {
+        if (i <= mid && j <= right) {
+            if (arr[i] <= arr[j]) {
+                merged.push_back(arr[i]);
+                i++;
+            } else {
+                merged.push_back(arr[j]);
+                j++;
+                inversions += mid - i + 1;
+            }
+        } else if (i <= mid) {
+            merged.push_back(arr[i]);
+            i++;
+        } else if (j <= right) {
+            merged.push_back(arr[j]);
+            j++;
+        }
+    }
+
+    for (int k = 0; k < merged.size(); k++) {
+        arr[left + k] = merged[k];
+    }
+
+    return inversions;
 }
 
 // Provided for you — do not modify.

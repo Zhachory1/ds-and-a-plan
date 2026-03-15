@@ -11,31 +11,55 @@
 #include <vector>
 
 int partition(std::vector<int>& arr, int low, int high) {
-    // TODO: Lomuto partition scheme.
+    int pivot = arr[high];
+    int i = low - 1;
 
-    return low; // placeholder — remove this line
+    for (int j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            std::swap(arr[i], arr[j]);
+        }
+    }
+
+    std::swap(arr[i + 1], arr[high]);
+    return i + 1;
 }
 
-void quickSort(std::vector<int>& arr, int low, int high,
-               int& max_depth, int current_depth) {
-    // TODO: Track depth and sort using partition().
-    //
+void quickSort(std::vector<int>& arr, int low, int high, int& max_depth, int current_depth) {
+    // Track depth and sort using partition()
     // ** Update max_depth: if current_depth > max_depth, max_depth = current_depth
+    
+    if (current_depth > max_depth) max_depth = current_depth;
+
+    if (low < high) {
+        int pivot = partition(arr, low, high);
+
+        quickSort(arr, low, pivot - 1, max_depth, current_depth + 1);
+        quickSort(arr, pivot + 1, high, max_depth, current_depth + 1);
+    }
 }
 
-void quickSortRandomized(std::vector<int>& arr, int low, int high,
-                         int& max_depth, int current_depth) {
-    // TODO: Same as quickSort, but randomize the pivot first.
-    //
+void quickSortRandomized(std::vector<int>& arr, int low, int high, int& max_depth, int current_depth) {
     // ** Update max_depth: if current_depth > max_depth, max_depth = current_depth
-    //
     // Before calling partition, pick a random index in [low, high]
     // and swap that element with arr[high]. Then proceed exactly as quickSort.
     //
     // Random index formula: low + rand() % (high - low + 1)
     //
     // Why does this help? Add a comment below explaining it:
-    // EXPLANATION: ...
+    // EXPLANATION: Randomizing the pivot reduces the chance of consistently bad splits.
+
+    if (current_depth > max_depth) max_depth = current_depth;
+
+    if (low < high) {
+        int random_index = low + rand() % (high - low + 1);
+        std::swap(arr[random_index], arr[high]);
+
+        int pivot = partition(arr, low, high);
+
+        quickSortRandomized(arr, low, pivot - 1, max_depth, current_depth + 1);
+        quickSortRandomized(arr, pivot + 1, high, max_depth, current_depth + 1);
+    }
 }
 
 // ── Demo main (excluded when running tests) ──────────────────────────────────

@@ -9,14 +9,49 @@
 #include <vector>
 
 void merge(std::vector<int>& arr, int left, int mid, int right) {
-    // TODO: Implement the merge step.
-    //
-    // Bonus: after writing the merged result back, print arr[left..right]
-    // to visualize the algorithm (e.g., "Merged [1, 3, 5, 7]")
+    std::vector<int> leftArr(mid - left + 1);
+    std::vector<int> rightArr(right - mid);
+
+    for (int i = 0; i < leftArr.size(); i++) {
+        leftArr[i] = arr[left + i];
+    }
+
+    for (int i = 0; i < rightArr.size(); i++) {
+        rightArr[i] = arr[mid + 1 + i];
+    }
+
+    int i = 0, j = 0;
+    int arrCounter = left;
+    
+    while (i < leftArr.size() || j < rightArr.size()) {
+        if (i < leftArr.size() && j < rightArr.size()) {
+            if (leftArr[i] <= rightArr[j]) {
+                arr[arrCounter] = leftArr[i];
+                i++;
+            }
+            else {
+                arr[arrCounter] = rightArr[j];
+                j++;
+            }
+        } else if (i < leftArr.size()) {
+            arr[arrCounter] = leftArr[i];
+            i++;
+        } else if (j < rightArr.size()) {
+            arr[arrCounter] = rightArr[j];
+            j++;
+        }
+        arrCounter++;
+    }
 }
 
 void mergeSort(std::vector<int>& arr, int left, int right) {
-    // TODO: Implement the recursive divide-and-conquer sort.
+    if (left >= right) return;
+
+    int mid = left + (right - left) / 2;
+
+    mergeSort(arr, left, mid);
+    mergeSort(arr, mid + 1, right);
+    merge(arr, left, mid, right);
 }
 
 // ── Demo main (excluded when running tests) ──────────────────────────────────
